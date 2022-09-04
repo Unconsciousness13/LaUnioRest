@@ -54,6 +54,12 @@ atlassian-ide-plugin.xml
 develop-eggs/ 
 dist/ 
 downloads/ 
+.vscode/
+__pycache__
+mediafiles/
+static/
+staticfiles/
+.idea
 eggs/ 
 .eggs/ 
 lib/ 
