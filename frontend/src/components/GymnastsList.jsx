@@ -27,7 +27,7 @@ export default function GymnastsList() {
           <p>{gymnast.train}</p>
           <p>{gymnast.birthdate}</p>
           <p>{gymnast.description}</p>
-          {gymnast.photo}? {<img src={gymnast.photo} alt="gymnast" />}
+          <img style={{width: '300px', height: '200px'}} src={"https://res.cloudinary.com/hifaleo6q/" + gymnast.photo} alt="gymnast" />
           
           <p>{gymnast.team}</p>
         </div>
