@@ -5,3 +5,8 @@ class GymnastSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gymnast
         fields = '__all__'
+        
+class TeamSerializer(serializers.ModelSerializer):
+    class MEta:
+        model = Team
+        fields = '__all__'
