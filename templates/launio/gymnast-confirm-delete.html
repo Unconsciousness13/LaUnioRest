@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block dynamic_content %}
+    <div class="form">
+        <h1>Borar Gymnasta</h1>
+        <form method="post">{% csrf_token %}
+            <p>Estás seguro de que quieres borrar "{{ gymnast.full_name }}"?</p>
+            <div class="center">
+                <button class="btn">
+                    <span>Confirmar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

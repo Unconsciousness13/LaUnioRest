@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block dynamic_content %}
+    <div class="profile-container">
+        <h1>@{{ profile.user_name }}</h1>
+        <h2>({{ profile.first_name }} {{ profile.last_name }})</h2>
+        <h3>{{ profile.email }}</h3>
+        {% if profile.profile_image %}
+            <div class="profile-image"><img src="{{ profile.profile_image.url }}" alt="profile photo"/></div>
+        {% endif %}
+        <h3>Prefil creado: {{ profile.start_time|date:'D d M Y' }}</h3>
+        <h4>Sobre mi:</h4><h4> {{ profile.about }}</h4></br>
+        {% if user.is_active %}
+            <a href="{% url 'profile edit' profile.pk %}">
+                <button class="home-reg-log-buttons">Editar</button>
+            </a>
+            <a href="{% url 'profile delete' profile.pk %}">
+                <button class="home-reg-log-buttons">Borrar</button>
+            </a>
+        {% endif %}
+     <br>
+    <h2 class="message" style="margin-top: 20px"><a style="color: deeppink" href="{% url 'password_reset' %}">¿Cambiar contraseña?</a></h2>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block dynamic_content %}
+
+
+    <div class="contact-form">
+
+        <h1 class="brand"><span>Contacta con nosotros</span></h1>
+            {% include 'launio/messages.html' %}
+            {% block content %}
+            {% endblock content %}
+
+
+        <div class="wrapper">
+
+            <div class="company-info">
+                <h3>Rítmica la Unió Barcelona</h3>
+
+
+                <ul>
+                    <li> C/Some Street, 15
+                        08840 Barcelona
+                    </li>
+                    <li>+34 111 111 111</li>
+                    <li></i>club@club.com</li>
+                </ul>
+                <ul class="ul-social-icons">
+                    <li><a class="social-icons" href="https://pako.es" target="new"><img
+                            src="{% static 'social_icons/instagram.png' %}"
+                            alt="instagram"/></a>
+                    </li>
+                    <li><a class="social-icons" href="https://pako.es" target="new"><img
+                            src="{% static 'social_icons/facebook.png' %}" alt="facebook"/></a>
+                    </li>
+                    <li><a class="social-icons" href="https://pako.es" target="new"><img
+                            src="{% static 'social_icons/youtube.png' %}" alt="youtube"/></a>
+                    </li>
+                    <li><a class="social-icons" href="https://pako.es" target="new"><img
+                            src="{% static 'social_icons/twitter.png' %}" alt="twitter"/></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="contact">
+                <form id="contact-form" method="POST">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+
+                    <p class="full">
+                        <button type="submit">Enviar</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<script>
+    setTimeout(function () {
+        if ($('#msg').length > 0) {
+            $('#msg').remove();
+        }
+    }, 2000)
+</script>
+
+
+

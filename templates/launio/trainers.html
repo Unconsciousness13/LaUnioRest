@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block dynamic_content %}
+    <div class="trainers-body-container">
+        <div class="row">
+            {% for club_trainer in object_list %}
+                <div class="column">
+                    <ul>
+                        <li><h1>{{ club_trainer.first_name }} {{ club_trainer.last_name }}</h1></li>
+                        <li>Fecha de nacimiento: {{ club_trainer.birthdate|date:"d M, Y" }}</li>
+                        <li>Entrena categorias: {{ club_trainer.train }}</li>
+                        <li><img src="{{ club_trainer.photo.url }}" alt="trainer photo"/></li>
+                        <li>{{ club_trainer.description }}</li>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'edit trainer' club_trainer.pk %}">
+                                <button class="home-reg-log-buttons">Editar</button>
+                            </a>
+                            <a href="{% url 'delete trainer' club_trainer.pk %}">
+                                <button class="home-reg-log-buttons">Borrar</button>
+                            </a>
+
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block dynamic_content %}
+    <div class="trainers-body-container">
+        <div class="row">
+            {% for team in object_list %}
+                {%  if not team.name == 'Sin conjunto'%}
+                <div class="column">
+                    <ul>
+                        <li><h1>{{ team.name }}</h1></li>
+                        {% if team.photo %}
+                        <li><img src="{{ team.photo.url }}" alt="team photo"/></li>
+                        {%  endif %}
+                    </ul>
+                    <a href="{% url 'detail team' team.pk %}">
+
+                        <button class="home-reg-log-buttons">Ver mas</button>
+                    </a>
+                </div>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

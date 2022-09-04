@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block dynamic_content %}
+    <div class="trainers-body-container">
+        <div class="row">
+            <div class="column">
+                <ul>
+                    <li><h1>{{ team.name }}</h1></li>
+                    {% if team.photo %}
+                        <li><img src="{{ team.photo.url }}" alt="team photo"/></li>
+                    {% endif %}
+                    {% for g in gymnast %}
+                        <li><a class="name-in-team-info" href="{% url 'detail gymnast' g.pk %}">{{ g.full_name }}</a>
+                        </li>
+                    {% endfor %}
+                    <br>
+                    <li>{{ team.description }}</li>
+                </ul>
+
+                {% if user.is_superuser %}
+                    <a href="{% url 'edit team' team.pk %}">
+                        <button class="home-reg-log-buttons">Editar</button>
+                    </a>
+                    <a href="{% url 'delete team' team.pk %}">
+                        <button class="home-reg-log-buttons">Borrar</button>
+                    </a>
+                {% endif %}
+            </div>
+            {% if user.is_active %}
+                <div class="notes-individual">
+                    <table>
+                        <caption style="font-size: 30px">Notas Conjunto</caption>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Competicion</th>
+                            <th>Poblacion</th>
+                            <th>Club</th>
+                            <th>Nota</th>
+                            <th>Clasificadas</th>
+                        </tr>
+                        {% for n in notes_team %}
+                            <tr>
+                                <td>{{ n.competition.competition_date }}</td>
+                                <td>{{ n.competition }}</td>
+                                <td>{{ n.competition.competition_place }}</td>
+                                <td>{{ n.competition.competition_club_organisation }}</td>
+                                <td class="nota">{{ n.nota_competition }}</td>
+                                <td class="competition-place">{{ n.competition_place_on_board }}</td>
+
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

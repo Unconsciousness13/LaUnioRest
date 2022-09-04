@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block dynamic_content %}
+    <div id="welcome-message">
+        <h1>Bienvenidos a</h1>
+        <h1>Club Rítmica la Unió Viladecans !</h1>
+    </div>
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form" method="POST">
+                {{ form }}
+                {% csrf_token %}
+                <button>Entrar</button>
+                <p class="message">No estas registrado? <a href="{% url 'register page' %}">Crear cuenta</a></p>
+                <p class="message">No estas registrado? <a href="{% url 'password_reset' %}">¿Contraseña olvidada?</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    {##}
+    {##}
+    {##}
+    {##}
+    {#    <form method="POST">#}
+    {#        {{ form }}#}
+    {#        {% csrf_token %}#}
+    {#        <div class="center">#}
+    {#            <button class="btn">#}
+    {#                <span>Entrar</span>#}
+    {#            </button>#}
+    {#        </div>#}
+    {#    </form>#}
+{% endblock %}

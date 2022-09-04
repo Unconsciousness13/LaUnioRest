@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CR la Unió Viladecans</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+    <link rel="shortcut icon" href="{% static 'favicons/favicon.ico' %}"/>
+
+</head>
+<body>
+<div id="loader">Loading ...</div>
+<header class="header">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="logo">
+                <a href="{% url 'show index' %}"><img id="logo-bar" src="{% static 'images/club_photos/Logo.png' %}"
+                                                      alt="logo"></a>
+            </div>
+            {% if user.is_active %}
+                <div class="user-nav-display">Hola <a id="user-name-navbar">{{ user.user_name }}</a>
+
+                </div>
+            {% endif %}
+
+            <button type="button" class="nav-toggler">
+                <span></span>
+            </button>
+            <nav class="nav">
+                <ul class="links">
+                    <li><a href="{% url 'show index' %}">Inicio</a></li>
+                    <li><a href="{% url 'show gymnasts' %}">Gimnastas</a></li>
+                    <li><a href="{% url 'show teams' %}">Conjuntos</a></li>
+                    <li><a href="{% url 'show trainers' %}">Entrenadoras</a></li>
+                    <li><a href="{% url 'contact' %}">Contacto</a></li>
+
+                    {% if  user.is_active %}
+                        {% if user.is_superuser %}
+                            <li><a>Anadir<i class='bx bxs-chevron-down'></i></a>
+                                <ul class="hidden">
+                                    <li><a href="{% url 'add gymnast' %}">Gimnasta</a></li>
+                                    <li><a href="{% url 'add team' %}">Conjunto</a></li>
+                                    <li><a href="{% url 'add trainer' %}">Entrenadora</a></li>
+                                    <li><a href="{% url 'add competition' %}">Competicion</a></li>
+                                    <li><a>Añadir Nota<i class='bx bxs-chevron-down'></i></a>
+                                        <ul class="hidden">
+                                            <li><a href="{% url 'add notes individual' %}">Individual</a></li>
+                                            <li><a href="{% url 'add notes team' %}">Conjunto</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
+
+                        <li>
+                            {% if user.profile_image %}
+                                <div class="img-nav-bar"><img src="{{ user.profile_image.url }}" alt="profile photo"/>
+                                </div>
+                            {% else %}
+                                <a>Prefil<i class='bx bxs-chevron-down'></i></a>
+                            {% endif %}
+                            <ul class="links">
+                                <li><a href="{% url 'profile view' user.pk %}">Ver Prefil</a></li>
+                                <li><a href="{% url 'logout' %}">Salir</a></li>
+
+                            </ul>
+                        </li>
+                    {% elif not user.is_active %}
+                        <li><a href="{% url 'register page' %}">Registrarte</a></li>
+                        <li><a href="{% url 'login page' %}">Iniciar sesión</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<div id="myDiv" class="animate-bottom">
+</div>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/loader.js' %}"></script>
+
+{% block dynamic_content %}
+
+
+{% endblock %}
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="copyright-container">
+                <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by
+                    <a href="https://www.pako.es" target="new">Pako™</a>
+                </p>
+            </div>
+
+            <div class="footer-social-icons-container">
+                <ul class="ul-social-icons">
+                    <li><a class="social-icons" href="https://pako.es" target="new"><img
+                            src="{% static 'social_icons/instagram.png' %}"
+                            alt="instagram"/></a>
+                    </li>
+                    <li><a class="social-icons" href="https://pako.es" target="new"><img
+                            src="{% static 'social_icons/facebook.png' %}" alt="facebook"/></a>
+                    </li>
+                    <li><a class="social-icons" href="https://pako.es" target="new"><img
+                            src="{% static 'social_icons/youtube.png' %}" alt="youtube"/></a>
+                    </li>
+                    <li><a class="social-icons" href="https://pako.es" target="new"><img
+                            src="{% static 'social_icons/twitter.png' %}" alt="twitter"/></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

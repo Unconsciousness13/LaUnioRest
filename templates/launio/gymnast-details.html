@@ -1,0 +1,84 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block dynamic_content %}
+    <div class="trainers-body-container">
+        <div class="row">
+            <div class="column">
+                <ul>
+                    <li><h1>{{ gymnast.full_name }}</h1></li>
+                    <li>Fecha de nacimiento: {{ gymnast.birthdate|date:"d M, Y" }}</li>
+                    <li>Categoria: {{ gymnast.category }}</li>
+                    <li>Entrena: {{ gymnast.train }}</li>
+                    <li>Conjunto: <a href="{% url 'detail team' gymnast.team.pk %}" style="color: deeppink">{{ gymnast.team }}</a></li>
+                    {% if gymnast.photo %}
+                        <li><img src="{{ gymnast.photo.url }}" alt="gymnast photo"/></li>
+                    {% endif %}
+                    <li>{{ gymnast.description }}</li>
+                </ul>
+
+
+                {% if user.is_superuser %}
+                    <a href="{% url 'edit gymnast' gymnast.pk %}">
+                        <button class="home-reg-log-buttons">Editar</button>
+                    </a>
+                    <a href="{% url 'delete gymnast' gymnast.pk %}">
+                        <button class="home-reg-log-buttons">Borrar</button>
+                    </a>
+                {% endif %}
+            </div>
+            {% if user.is_active %}
+                <div class="notes-individual">
+                    <h2>Notas Individual</h2>
+                    <table>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Competicion</th>
+                            <th>Poblacion</th>
+                            <th>Club</th>
+                            <th>Nota</th>
+                            <th>Clasificada</th>
+                        </tr>
+                        {% for n in notesIndividual %}
+                            <tr>
+                                <td>{{ n.competition.competition_date }}</td>
+                                <td>{{ n.competition }}</td>
+                                <td>{{ n.competition.competition_place }}</td>
+                                <td>{{ n.competition.competition_club_organisation }}</td>
+                                <td class="nota">{{ n.nota_competition }}</td>
+                                <td class="competition-place">{{ n.competition_place_on_board }}</td>
+
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                    {% if not gymnast.team.name == 'Sin conjunto' or gymnast.team.name == 'Sin Conjunto' %}
+                        <h2>Notas Conjunto</h2>
+                        <table>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Competicion</th>
+                                <th>Poblacion</th>
+                                <th>Club</th>
+                                <th>Nota</th>
+                                <th>Clasificadas</th>
+                            </tr>
+                            {% for n in notes_team %}
+                                <tr>
+                                    {#                            {%  if gymnast.team.pk == n.team.pk %}#}
+                                    <td>{{ n.competition.competition_date }}</td>
+                                    <td>{{ n.competition }}</td>
+                                    <td>{{ n.competition.competition_place }}</td>
+                                    <td>{{ n.competition.competition_club_organisation }}</td>
+                                    <td class="nota">{{ n.nota_competition }}</td>
+                                    <td class="competition-place">{{ n.competition_place_on_board }}</td>
+                                    {#                            {% endif %}#}
+
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
