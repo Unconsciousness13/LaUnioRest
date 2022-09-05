@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from launio.club.models import Gymnast, Team, Trainer , Competition , NotesIndividual , NotesTeam, Contact
+from launio.accounts.models import  NewUser
 
 class GymnastSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,4 +35,10 @@ class NotesTeamSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
+        fields = '__all__'
+        
+        
+class NewUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewUser
         fields = '__all__'

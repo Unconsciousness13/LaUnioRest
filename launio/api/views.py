@@ -1,6 +1,7 @@
 from asyncio.sslproto import _DO_HANDSHAKE
+from launio.accounts.models import CustomAccountManager, NewUser
 from launio.club.models import Gymnast, Team,Trainer , NotesIndividual , NotesTeam , Contact , Competition
-from .serializers import GymnastSerializer,TrainerSerializer, TeamSerializer , NotesIndividualSerializer , NotesTeamSerializer, CompetitionSerializer, ContactSerializer
+from .serializers import GymnastSerializer,TrainerSerializer, TeamSerializer , NotesIndividualSerializer , NotesTeamSerializer, CompetitionSerializer, ContactSerializer, NewUserSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser
 
@@ -119,4 +120,23 @@ class CompetitionAdd(generics.CreateAPIView):
 class ContactSend(generics.CreateAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+    permission_classes = [IsAdminUser]
+    
+# New User
+    
+class NewUserList(generics.ListCreateAPIView):
+    queryset = NewUser.objects.all()
+    serializer_class = NewUserSerializer
+    permission_classes = [IsAdminUser]
+
+class NewUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = NewUser.objects.all()
+    serializer_class = NewUserSerializer
+    permission_classes = [IsAdminUser]
+
+
+    
+class NewUserAdd(generics.CreateAPIView):
+    queryset = NewUser.objects.all()
+    serializer_class = NewUserSerializer
     permission_classes = [IsAdminUser]

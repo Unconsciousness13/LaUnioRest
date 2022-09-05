@@ -24,6 +24,10 @@ urlpatterns = [
     path('competition/<int:pk>/', views.CompetitionDetail.as_view(), name='competition-single'),
     path('competition/add/', views.CompetitionAdd.as_view(), name='competition-add'),
     path('contact/send/', views.ContactSend.as_view(), name='contact-send'),
-        
+    path('users/', views.NewUserList.as_view(), name='user-list'),
+    path('users/<int:pk>/', views.NewUserDetail.as_view(), name='user-detail'),
+    path('users/add', views.NewUserAdd.as_view(), name='user-add'),
+    
+    
 ]   
 
