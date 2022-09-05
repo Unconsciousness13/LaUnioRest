@@ -183,3 +183,4 @@ cloudinary.config(
     api_key=os.getenv('CLOUD_API_KEY'),
     api_secret=os.getenv('CLOUD_API_SECRET')
 )
+
